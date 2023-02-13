@@ -1,6 +1,6 @@
 #version 330
 
-out fragColor;
+out vec4 fragColor;
 void main(){
     //vec4(red, green, blue, alpha)
     //rgba -> red 100/255

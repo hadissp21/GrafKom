@@ -50,7 +50,7 @@ public class Object2d extends ShaderProgram{
         glLineWidth(1); // ketebalan garis
         glPointSize(0); // besar kecil vertex
         //Wajib
-        //GL_LINE
+        //GL_LINES
         //GL_LINE_STRIP
         //GL_LINE_LOOP
         //GL_TRIANGLES
