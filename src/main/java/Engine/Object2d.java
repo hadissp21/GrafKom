@@ -16,10 +16,12 @@ import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 public class Object2d extends ShaderProgram{
 
     List<Vector3f> vertices;
+    List<Vector3f> verticesColor;
     int vao;
     int vbo;
     UniformsMap uniformsMap;
     Vector4f color;
+    int vboColor;
 
     public Object2d(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color) {
         super(shaderModuleDataList);
@@ -30,6 +32,12 @@ public class Object2d extends ShaderProgram{
         this.color = color;
     }
 
+    public Object2d(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, List<Vector3f> verticesColor) {
+        super(shaderModuleDataList);
+        this.vertices = vertices;
+        this.verticesColor = verticesColor;
+        setupVAOVBOWithVerticesColor();
+    }
     public void setupVAOVBO(){
         //set VAO
         vao = glGenVertexArrays();
@@ -41,9 +49,25 @@ public class Object2d extends ShaderProgram{
         glBufferData(GL_ARRAY_BUFFER, Utils.listoFloat(vertices), GL_STATIC_DRAW);
     }
 
+    public void setupVAOVBOWithVerticesColor(){
+        //set VAO
+        vao = glGenVertexArrays();
+        glBindVertexArray(vao);
+
+        //set vbo
+        vbo = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferData(GL_ARRAY_BUFFER, Utils.listoFloat(vertices), GL_STATIC_DRAW);
+
+        //set vboColor
+        vbo = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboColor);
+        glBufferData(GL_ARRAY_BUFFER, Utils.listoFloat(verticesColor), GL_STATIC_DRAW);
+    }
+
     public void drawSetup(){
         bind();
-
+        uniformsMap.setUniform("uni_color", color);
         //Bind VBO
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
