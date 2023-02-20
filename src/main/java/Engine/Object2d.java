@@ -1,6 +1,7 @@
 package Engine;
 
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import java.security.PublicKey;
 import java.util.List;
@@ -17,11 +18,16 @@ public class Object2d extends ShaderProgram{
     List<Vector3f> vertices;
     int vao;
     int vbo;
+    UniformsMap uniformsMap;
+    Vector4f color;
 
-    public Object2d(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices) {
+    public Object2d(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color) {
         super(shaderModuleDataList);
         this.vertices = vertices;
         setupVAOVBO();
+        uniformsMap = new UniformsMap((getProgramId()));
+        uniformsMap.createUniform("uni_color");
+        this.color = color;
     }
 
     public void setupVAOVBO(){
