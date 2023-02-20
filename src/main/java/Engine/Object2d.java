@@ -60,7 +60,7 @@ public class Object2d extends ShaderProgram{
         glBufferData(GL_ARRAY_BUFFER, Utils.listoFloat(vertices), GL_STATIC_DRAW);
 
         //set vboColor
-        vbo = glGenBuffers();
+        vboColor = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vboColor);
         glBufferData(GL_ARRAY_BUFFER, Utils.listoFloat(verticesColor), GL_STATIC_DRAW);
     }
