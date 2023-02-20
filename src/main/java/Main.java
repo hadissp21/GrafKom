@@ -24,8 +24,8 @@ public class Main {
         //code
         objects.add(new Object2d(
                 Arrays.asList(
-                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
-                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneVerticesColor.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneVerticesColor.frag", GL_FRAGMENT_SHADER)
                 ),
                 new ArrayList<>(
                         List.of(
@@ -34,7 +34,13 @@ public class Main {
                             new Vector3f(0.5f, -0.5f, 0.0f)
                         )
                 ),
-                new Vector4f(0.0f, 1.0f, 0.0f, 1.0f)
+                new ArrayList<>(
+                        List.of(
+                                new Vector3f(-1.0f, 0.0f, 0.0f),
+                                new Vector3f(1.0f, 0.5f, 0.0f),
+                                new Vector3f(-0.5f, 1.0f, 0.0f)
+                        )
+                )
         ));
     }
     public void loop(){
@@ -45,7 +51,7 @@ public class Main {
 
             //code
             for(Object2d object: objects){
-                object.draw();
+                object.drawWithVerticesColor();
             }
 
 

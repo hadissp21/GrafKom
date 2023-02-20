@@ -73,12 +73,40 @@ public class Object2d extends ShaderProgram{
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
     }
+    public void drawSetupWithVerticesColor(){
+        bind();
+        //Bind VBO
+        glEnableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+
+        //Bind VBOColor
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, vboColor);
+        glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, 0);
+    }
     public void draw(){
         drawSetup();
         // Draw the vertices
         //Optional
         glLineWidth(1); // ketebalan garis
         glPointSize(0); // besar kecil vertex
+        //Wajib
+        //GL_LINES
+        //GL_LINE_STRIP
+        //GL_LINE_LOOP
+        //GL_TRIANGLES
+        //GL_TRIANGLE_FAN
+        //GL_POINT
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    }
+
+    public void drawWithVerticesColor(){
+        drawSetupWithVerticesColor();
+        // Draw the vertices
+        //Optional
+        glLineWidth(10); // ketebalan garis
+        glPointSize(10); // besar kecil vertex
         //Wajib
         //GL_LINES
         //GL_LINE_STRIP
